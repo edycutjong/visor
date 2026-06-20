@@ -1,4 +1,4 @@
-.PHONY: help bootstrap build test lint typecheck ci e2e lighthouse security-scan check-readiness verify-offline seed bench
+.PHONY: help bootstrap build test lint typecheck ci e2e lighthouse security-scan check-readiness verify-offline seed bench version-patch version-minor version-major
 .PHONY: bootstrap-sdk bootstrap-contract bootstrap-agent bootstrap-cli bootstrap-ui
 .PHONY: build-sdk build-contract build-agent build-cli build-ui
 .PHONY: test-sdk test-contract test-agent test-cli test-ui
@@ -24,6 +24,9 @@ help:
 	@echo "verify-offline   - Run the enclave PII leak offline verification"
 	@echo "seed             - Seed default templates into the coordinator agent"
 	@echo "bench            - Run latency benchmarks for cryptographic operations"
+	@echo "version-patch    - Bump version by patch (x.y.Z+1)"
+	@echo "version-minor    - Bump version by minor (x.Y+1.0)"
+	@echo "version-major    - Bump version by major (X+1.0.0)"
 
 bootstrap:
 	npm run bootstrap
@@ -111,4 +114,13 @@ seed:
 
 bench:
 	python3 scripts/bench.py
+
+version-patch:
+	python3 scripts/bump_version.py patch
+
+version-minor:
+	python3 scripts/bump_version.py minor
+
+version-major:
+	python3 scripts/bump_version.py major
 
