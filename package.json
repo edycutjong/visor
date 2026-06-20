@@ -23,7 +23,7 @@
     "test:coverage": "cd agent && npm run test -- --coverage && cd sdk && npm run test:coverage && cd cli && npm run test && cd ui && npm run test:coverage",
     "lint": "npm run lint:ui",
     "lint:ui": "cd ui && npm run lint",
-    "typecheck": "npm run typecheck:ui && npm run typecheck:agent && npm run typecheck:sdk && npm run typecheck:cli",
+    "typecheck": "npm run build:sdk && npm run typecheck:ui && npm run typecheck:agent && npm run typecheck:sdk && npm run typecheck:cli",
     "typecheck:ui": "cd ui && npx tsc --noEmit",
     "typecheck:agent": "cd agent && npx tsc --noEmit",
     "typecheck:sdk": "cd sdk && npx tsc --noEmit",
