@@ -40,7 +40,7 @@ jobs:
         run: npm run test
       - name: Upload coverage report
         if: matrix.node-version == 20
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: agent-coverage
           path: agent/coverage/
@@ -148,7 +148,7 @@ jobs:
           NODE_ENV: production
       - name: Upload E2E artifacts on failure
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: |
