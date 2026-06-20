@@ -1,0 +1,33 @@
+[
+  {
+    "id": "clinic-intake",
+    "name": "Clinical Intake Agent",
+    "description": "Secure appointment booking for healthcare providers. Hides patient identity and symptoms.",
+    "host": "https://clinic.sandbox.test",
+    "path": "/api/mock/clinic/intake",
+    "method": "POST",
+    "fields": {
+      "first_name": "{{profile.first_name}}",
+      "dob": "{{profile.dob}}",
+      "email": "{{profile.email}}",
+      "symptom": "dermatological consult and skin lesion checking"
+    },
+    "markers": ["clinic", "medical", "intake"]
+  },
+  {
+    "id": "job-application",
+    "name": "Job Application ATS Agent",
+    "description": "Blind recruiting submission for ATS software. Hides name, age, and contact information.",
+    "host": "https://ats.sandbox.test",
+    "path": "/api/mock/ats/apply",
+    "method": "POST",
+    "fields": {
+      "first_name": "{{profile.first_name}}",
+      "dob": "{{profile.dob}}",
+      "email": "{{profile.email}}",
+      "experience_years": "5",
+      "role": "Staff Cryptography Engineer"
+    },
+    "markers": ["ats", "hr", "recruitment"]
+  }
+]

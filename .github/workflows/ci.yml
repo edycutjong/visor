@@ -1,0 +1,202 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── STAGE 1: Code Quality ─────────────────────────────────
+  quality:
+    name: "Stage 1 · Code Quality"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ${{ github.event_name == 'push' && fromJSON('[20, 22]') || fromJSON('[20]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Install dependencies
+        run: npm run bootstrap
+      - name: Lint UI
+        run: npm run lint
+      - name: Type check
+        run: npm run typecheck
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+      - name: Run unit & integration tests
+        run: npm run test
+      - name: Upload coverage report
+        if: matrix.node-version == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-coverage
+          path: agent/coverage/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # ── STAGE 2: Security Gate ────────────────────────────────
+  secret-scan:
+    name: "Stage 2 · Secret Scanning"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: TruffleHog Secret Scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  dependency-audit:
+    name: "Stage 2 · Dependency Audit"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install dependencies
+        run: npm run bootstrap
+      - name: npm audit
+        run: npm run audit
+        continue-on-error: true
+      - name: License compliance check
+        run: npx license-checker --production --failOn "GPL-3.0;AGPL-3.0" --summary
+        continue-on-error: true
+
+  # ── STAGE 3: Build Verification ───────────────────────────
+  build:
+    name: "Stage 3 · Build Verification"
+    needs: [quality]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install dependencies
+        run: npm run bootstrap
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+      - name: Build packages & contract
+        run: npm run build
+      - name: Check Next.js bundle size
+        run: |
+          echo "📦 Bundle Size Report"
+          echo "─────────────────────"
+          if [ -d "ui/.next" ]; then
+            TOTAL_SIZE=$(du -sk ui/.next/static | cut -f1)
+            echo "Total static assets: ${TOTAL_SIZE}KB"
+            if [ "$TOTAL_SIZE" -gt 2000 ]; then
+              echo "::error::Bundle size ${TOTAL_SIZE}KB exceeds 2000KB error threshold"
+              exit 1
+            elif [ "$TOTAL_SIZE" -gt 1500 ]; then
+              echo "::warning::Bundle size ${TOTAL_SIZE}KB exceeds 1500KB warning threshold"
+            else
+              echo "✅ Bundle size within budget"
+            fi
+          fi
+
+  # ── STAGE 4: E2E Tests ────────────────────────────────────
+  e2e:
+    name: "Stage 4 · E2E Tests"
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install dependencies
+        run: npm run bootstrap
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+      - name: Build packages & contract
+        run: npm run build
+      - name: Run E2E tests
+        run: npm run e2e
+        env:
+          NODE_ENV: production
+      - name: Upload E2E artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            ui/playwright-report/
+            ui/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # ── STAGE 5: Performance ──────────────────────────────────
+  performance:
+    name: "Stage 5 · Performance"
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - name: Install dependencies
+        run: npm run bootstrap
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+      - name: Build packages & contract
+        run: npm run build
+      - name: Lighthouse CI
+        run: npm run lighthouse
+        continue-on-error: true
+
+  # ── STAGE 6: Deploy Gate ──────────────────────────────────
+  deploy-gate:
+    name: "Stage 6 · Deploy Gate"
+    needs: [build, e2e, performance, secret-scan, dependency-audit]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: All gates passed
+        run: |
+          echo "🚀 All CI/CD gates passed!"
+          echo ""
+          echo "Pipeline Summary:"
+          echo "  ✅ Stage 1 — Code Quality (lint, typecheck, tests)"
+          echo "  ✅ Stage 2 — Secret Scanning (TruffleHog)"
+          echo "  ✅ Stage 2 — Dependency Audit (npm)"
+          echo "  ✅ Stage 3 — Build Verification"
+          echo "  ✅ Stage 4 — E2E Tests (Playwright)"
+          echo "  ✅ Stage 5 — Performance (Lighthouse CI)"

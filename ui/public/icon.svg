@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Brand Gradients -->
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      /* Enclave Ring Pulse */
+      .enclave-ring {
+        transform-origin: 256px 256px;
+        animation: ring-pulse 4s ease-in-out infinite;
+      }
+      @keyframes ring-pulse {
+        0%, 100% {
+          opacity: 0.15;
+          stroke-width: 6;
+          transform: scale(0.99);
+        }
+        50% {
+          opacity: 0.4;
+          stroke-width: 8;
+          transform: scale(1.01);
+        }
+      }
+
+      /* Scanning Line Sweep */
+      .scanner-beam {
+        animation: scan-sweep 3s ease-in-out infinite;
+      }
+      @keyframes scan-sweep {
+        0%, 100% {
+          transform: translateY(-24px);
+          opacity: 0.2;
+        }
+        50% {
+          transform: translateY(24px);
+          opacity: 1;
+        }
+      }
+
+      /* Rotating Brackets */
+      .bracket-left {
+        transform-origin: 256px 256px;
+        animation: rotate-cw 25s linear infinite;
+      }
+      .bracket-right {
+        transform-origin: 256px 256px;
+        animation: rotate-ccw 20s linear infinite;
+      }
+      @keyframes rotate-cw {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes rotate-ccw {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(-360deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#090a0f" rx="96"/>
+
+  <!-- Rotating Outer Circles -->
+  <circle class="bracket-left" cx="256" cy="256" r="180" fill="none" stroke="url(#brandGrad)" stroke-width="3" stroke-dasharray="15 30" opacity="0.3"/>
+  <circle class="bracket-right" cx="256" cy="256" r="195" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="40 40" opacity="0.15"/>
+
+  <!-- Outer Enclave Ring -->
+  <circle class="enclave-ring" cx="256" cy="256" r="165" fill="none" stroke="url(#brandGrad)" stroke-width="6"/>
+
+  <!-- Visor Cyber Mask -->
+  <g filter="url(#neonGlow)" transform="translate(0, 0)">
+    <!-- 1. Central Scanner Lens (glass — behind the beam) -->
+    <path d="M 166 235 Q 256 195 346 235 Q 356 275 326 295 Q 256 315 186 295 Q 156 275 166 235 Z" fill="#0d1117" stroke="url(#brandGrad)" stroke-width="2" stroke-linejoin="round"/>
+
+    <!-- 2. Scanning Beam Line (on top of glass, clipped to outer shield) -->
+    <clipPath id="shieldClip">
+      <path d="M 146 210 Q 256 160 366 210 Q 386 280 346 320 Q 256 350 166 320 Q 126 280 146 210 Z"/>
+    </clipPath>
+    <g class="scanner-beam" clip-path="url(#shieldClip)">
+      <line x1="156" y1="265" x2="356" y2="265" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- 3. Solid Frame (on top of beam — compound path with lens cutout) -->
+    <path d="M 146 210 Q 256 160 366 210 Q 386 280 346 320 Q 256 350 166 320 Q 126 280 146 210 Z
+             M 166 235 Q 156 275 186 295 Q 256 315 326 295 Q 356 275 346 235 Q 256 195 166 235 Z"
+          fill="#090a0f" fill-rule="evenodd" stroke="url(#brandGrad)" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- Secure Dot Sensors -->
+    <circle cx="256" cy="150" r="4" fill="#06b6d4"/>
+    <circle cx="256" cy="362" r="4" fill="#06b6d4"/>
+  </g>
+
+</svg>

@@ -1,0 +1,12 @@
+{
+  "did:t3n:maria123": {
+    "first_name": "Maria",
+    "dob": "1994-08-14",
+    "email": "maria.s@healthmail.net"
+  },
+  "did:t3n:john456": {
+    "first_name": "John Doe",
+    "dob": "1988-11-23",
+    "email": "john.doe@techcorp.com"
+  }
+}
