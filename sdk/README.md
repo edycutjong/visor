@@ -1,4 +1,4 @@
-# Visor SDK (`@visor/sdk`)
+# Visor SDK (`@edycutjong/visor`)
 
 TypeScript client SDK for compiling encrypted payloads and validating submission proofs before forwarding to the Visor agent gateway.
 
@@ -7,7 +7,7 @@ TypeScript client SDK for compiling encrypted payloads and validating submission
 ### `VisorClient` Class
 
 ```typescript
-import { VisorClient } from '@visor/sdk';
+import { VisorClient } from '@edycutjong/visor';
 
 const client = new VisorClient({
   agentUrl: 'http://localhost:3000'

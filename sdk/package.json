@@ -1,5 +1,5 @@
 {
-  "name": "@visor/sdk",
+  "name": "@edycutjong/visor",
   "version": "1.0.0",
   "description": "Visor Client SDK",
   "main": "dist/index.js",

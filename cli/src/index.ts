@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { VisorClient } from '@visor/sdk';
+import { VisorClient } from '@edycutjong/visor';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';

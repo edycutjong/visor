@@ -11,8 +11,8 @@ jest.mock('fs', () => ({
 }));
 
 // Mock only the network calls of VisorClient, keeping real crypto behavior
-jest.mock('@visor/sdk', () => {
-  const actual = jest.requireActual('@visor/sdk');
+jest.mock('@edycutjong/visor', () => {
+  const actual = jest.requireActual('@edycutjong/visor');
   return {
     ...actual,
     VisorClient: jest.fn().mockImplementation((config) => {

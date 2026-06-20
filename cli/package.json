@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "commander": "^12.0.0",
-    "@visor/sdk": "file:../sdk"
+    "@edycutjong/visor": "file:../sdk"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
