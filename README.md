@@ -19,11 +19,12 @@
   ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
   ![Tailwind](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=flat&logo=tailwindcss&logoColor=white)
   ![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+  ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
+  ![Jest](https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white)
+  
   ![Rust WASM](https://img.shields.io/badge/Rust_WASM-de782f?style=flat&logo=rust&logoColor=white)
   ![Intel TDX](https://img.shields.io/badge/Intel_TDX-0071c5?style=flat&logo=intel&logoColor=white)
   ![T3 ADK](https://img.shields.io/badge/T3_ADK-8b5cf6?style=flat)
-  ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
-  ![Jest](https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white)
   [![CI](https://github.com/edycutjong/visor/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/visor/actions/workflows/ci.yml)
 
 </div>

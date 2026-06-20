@@ -200,3 +200,59 @@ jobs:
           echo "  ✅ Stage 3 — Build Verification"
           echo "  ✅ Stage 4 — E2E Tests (Playwright)"
           echo "  ✅ Stage 5 — Performance (Lighthouse CI)"
+
+  # ── STAGE 7: Publish to npmjs (main only) ──────────────────
+  publish-npm:
+    name: "Stage 7 · Publish to npmjs"
+    needs: [deploy-gate]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install and Build SDK
+        run: |
+          cd sdk
+          npm ci
+          npm run build
+
+      - name: Check and Publish SDK
+        run: |
+          cd sdk
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          if npm view @edycutjong/visor@$CURRENT_VERSION version >/dev/null 2>&1; then
+            echo "Version $CURRENT_VERSION of @edycutjong/visor is already published to npmjs, skipping."
+          else
+            echo "Publishing @edycutjong/visor version $CURRENT_VERSION to npmjs..."
+            npm publish --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install and Build CLI
+        run: |
+          cd cli
+          npm ci
+          npm run build
+
+      - name: Check and Publish CLI
+        run: |
+          cd cli
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          if npm view @edycutjong/visor-cli@$CURRENT_VERSION version >/dev/null 2>&1; then
+            echo "Version $CURRENT_VERSION of @edycutjong/visor-cli is already published to npmjs, skipping."
+          else
+            echo "Publishing @edycutjong/visor-cli version $CURRENT_VERSION to npmjs..."
+            npm publish --access public
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+

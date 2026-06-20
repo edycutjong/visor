@@ -1,5 +1,5 @@
 {
-  "name": "visor-cli",
+  "name": "@edycutjong/visor-cli",
   "version": "1.1.0",
   "description": "Visor Command Line Interface",
   "main": "dist/index.js",

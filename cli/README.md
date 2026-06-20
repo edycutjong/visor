@@ -1,4 +1,4 @@
-# Visor CLI (`visor-cli`)
+# Visor CLI (`@edycutjong/visor-cli`)
 
 Developer command-line interface for the Visor privacy-blind submission gateway. It implements options to register templates, submit encrypted payloads, cryptographically verify receipts, and run local performance benchmarks.
 
