@@ -1,6 +1,6 @@
 {
   "name": "visor-root",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "scripts": {
     "bootstrap": "npm run bootstrap:sdk && npm run bootstrap:agent && npm run bootstrap:cli && npm run bootstrap:ui",

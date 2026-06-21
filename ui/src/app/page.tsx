@@ -55,7 +55,7 @@ interface TelemetryEntry {
 
 export default function Page() {
   // Config
-  const [agentUrl, setAgentUrl] = useState(process.env.NEXT_PUBLIC_AGENT_URL || 'http://localhost:3000');
+  const [agentUrl, setAgentUrl] = useState(process.env.NEXT_PUBLIC_AGENT_URL || 'http://localhost:3001');
 
   // Enclave / UI state
   const [enclaveStatus, setEnclaveStatus] = useState<'active' | 'syncing' | 'offline'>('active');
