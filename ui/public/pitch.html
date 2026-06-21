@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor — Pitch Deck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-display {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Force-hide inactive slides. */
+    .slide {
+      display: none !important;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .slide.active {
+      display: flex !important;
+      animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .glass-panel {
+      background: rgba(10, 15, 30, 0.45);
+      border: 1px solid rgba(6, 182, 212, 0.08);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-card-hover:hover {
+      border-color: rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.05);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body class="bg-[#030712] text-slate-100 h-full overflow-hidden flex flex-col justify-between select-none">
+  <!-- Top Bar -->
+  <header
+    class="h-16 border-b border-white/5 bg-[#030712]/80 backdrop-blur-lg flex items-center justify-between px-8 z-10 shrink-0">
+    <div class="flex items-center gap-3">
+      <!-- Standalone SVG path logo for VISOR -->
+      <svg class="h-6" viewBox="0 0 355 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="42" font-family="'Outfit', sans-serif" font-weight="900" font-size="48" fill="url(#headerGrad)">VISOR</text>
+        <defs>
+          <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#06b6d4" />
+            <stop offset="100%" stop-color="#8b5cf6" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <span
+        class="text-[9px] font-mono border border-cyan-500/20 bg-cyan-500/5 px-2 py-0.5 rounded text-cyan-400 uppercase tracking-widest">TEE
+        Egress Gateway</span>
+    </div>
+    <div class="text-xs font-mono text-slate-500">
+      DoraHacks T3ADK Launch Edition 2026
+    </div>
+  </header>
+
+  <!-- Progress Bar at top of content -->
+  <div class="h-0.5 w-full bg-white/5 relative z-10 shrink-0">
+    <div id="progress-bar" class="h-full bg-linear-to-r from-cyan-500 to-purple-500 transition-all duration-300"
+      style="width: 9%"></div>
+  </div>
+
+  <!-- Slide Container -->
+  <main class="flex-1 flex items-center justify-center p-8 relative overflow-hidden">
+
+    <!-- Background Gradients -->
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_15%_25%,rgba(6,182,212,0.04),transparent_50%)] pointer-events-none">
+    </div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_85%_75%,rgba(139,92,246,0.03),transparent_50%)] pointer-events-none">
+    </div>
+
+    <!-- Tech Grid pattern -->
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-size-[48px_48px] pointer-events-none">
+    </div>
+
+    <!-- Slide 1: Title Slide (Active) -->
+    <div class="slide active max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 01 // Title &amp; Hook</span>
+        <h1 class="text-5xl font-black text-slate-100 tracking-tight leading-none mb-4">
+          Your Agent Acts.<br/>It Never Sees You.
+        </h1>
+        <p class="text-slate-400 text-lg max-w-lg mb-6 leading-relaxed">
+          Cryptographically Blinded Egress Gateway inside TEE Hardware Enclaves for Private AI Automation.
+        </p>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative">
+        <div
+          class="absolute inset-0 bg-linear-to-br from-cyan-500/5 to-purple-500/5 rounded-2xl pointer-events-none">
+        </div>
+        <div class="flex items-center gap-1.5 mb-5 border-b border-white/5 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500/60"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-purple-500/60"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-green-500/60"></span>
+          <span class="text-[9px] font-mono text-cyan-400 ml-auto uppercase tracking-wider">Secure Egress Tunnel</span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex justify-between items-center border-b border-white/5 pb-2">
+            <span class="text-xs text-slate-400 font-mono">ENVELOPE DECRYPT:</span>
+            <span class="text-xs text-green-400 font-mono font-semibold">SUCCESS (ECIES)</span>
+          </div>
+          <div class="flex justify-between items-center border-b border-white/5 pb-2">
+            <span class="text-xs text-slate-400 font-mono">ZK COMMITMENT:</span>
+            <span class="text-xs text-green-400 font-mono font-semibold">VERIFIED (Groth16)</span>
+          </div>
+          <div class="flex justify-between items-center pb-2">
+            <span class="text-xs text-slate-400 font-mono">PII EGRESS ISOLATION:</span>
+            <span class="text-xs text-cyan-400 font-mono font-semibold">BLINDED (T3 Edge)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 02 // The Problem</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">AI Agents Require Sensitive PII</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          To complete bookings, submit applications, or coordinate payments, AI agents require plaintext user attributes: full names, SSNs, DOBs, and billing addresses. Storing, logging, or feeding this data into LLM coordinator context compromises user privacy permanently.
+        </p>
+        <div class="flex gap-8">
+          <div class="border-l-2 border-red-500/50 pl-4">
+            <p class="text-2xl font-bold text-red-500">100%</p>
+            <p class="text-[10px] uppercase font-mono tracking-wider text-slate-500">Plaintext PII Exposure to LLMs</p>
+          </div>
+          <div class="border-l-2 border-red-500/50 pl-4">
+            <p class="text-2xl font-bold text-red-500">Zero</p>
+            <p class="text-[10px] uppercase font-mono tracking-wider text-slate-500">Isolation Boundaries in Transit</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex-1 bg-red-950/5 border border-red-500/10 rounded-2xl p-8 max-w-md w-full relative shadow-[0_8px_32px_0_rgba(239,68,68,0.02)]">
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.03),transparent_70%)] pointer-events-none">
+        </div>
+        <div class="flex items-center gap-1.5 mb-5 border-b border-red-500/10 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="text-[9px] font-mono text-red-500 ml-auto uppercase">Host VM Memory Leak</span>
+        </div>
+        <div
+          class="bg-black/50 border border-red-950/50 rounded-xl p-5 font-mono text-[10.5px] text-red-400 space-y-2 leading-relaxed">
+          <div>&gt; INGESTING USER_PROFILE:</div>
+          <div class="text-red-500 font-semibold pl-2"> "full_name": "Maria Garcia",</div>
+          <div class="text-red-500 font-semibold pl-2"> "ssn": "901-XX-XXXX"</div>
+          <div class="text-red-600/80 animate-pulse mt-4 font-bold border border-red-500/20 p-2 rounded text-center">
+            !!! WARNING: PLAINTEXT PII VISIBLE IN SYSTEM LOGS !!!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: The Security Gap -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 03 // The Security Gap</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">Plaintext Egress Leakage</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          Standard coordinator setups handle user PII in volatile, unsecure web server memory. Network proxy logs, host machine admins, and outbound traffic inspectors can easily sniff sensitive API request parameters.
+        </p>
+        <div class="space-y-3 font-mono text-xs text-slate-400">
+          <div class="flex items-center gap-2.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+            <span>Unsecure server RAM exposes credentials to host VM</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+            <span>Network proxies log raw outgoing payload query parameters</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full">
+        <div class="w-full space-y-4">
+          <div class="flex items-center gap-1.5 border-b border-white/5 pb-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500/60"></span>
+            <span class="text-[9px] font-mono text-slate-500 ml-auto uppercase">Proxy Egress Capture</span>
+          </div>
+          <div
+            class="bg-black/60 rounded-xl border border-white/5 p-5 font-mono text-[10px] text-slate-400 space-y-1.5">
+            <div>POST /api/appointments HTTP/1.1</div>
+            <div>Host: clinic-server.com</div>
+            <div class="text-red-400 font-semibold bg-red-950/20 px-1 py-0.5 rounded">Content:
+              name=Maria+Garcia&amp;ssn=901001122</div>
+            <div class="text-slate-600 mt-3 pt-2 border-t border-white/5">// Captured at unsecure gateway proxy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: The Solution -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 04 // The Solution</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">Visor — The Privacy-Blind Gateway</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          Visor keeps the coordinator completely blind. Users encrypt their PII locally. Unsecure agents schedule actions using secure placeholders (e.g. `{{profile.ssn}}`). Decryption and placeholder injection occur exclusively within a secure TEE enclave during out-of-band egress.
+        </p>
+        <div class="grid grid-cols-2 gap-4 w-full">
+          <div class="glass-panel rounded-xl p-4 glass-card-hover transition-all duration-300">
+            <span class="text-cyan-400 font-bold block text-lg">TEE Egress Proxy</span>
+            <span class="text-[10px] uppercase font-mono tracking-wider text-slate-500">Hardware Isolated RAM</span>
+          </div>
+          <div class="glass-panel rounded-xl p-4 glass-card-hover transition-all duration-300">
+            <span class="text-cyan-400 font-bold block text-lg">Zero Log Leakage</span>
+            <span class="text-[10px] uppercase font-mono tracking-wider text-slate-500">LLM Only Sees Placeholders</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative">
+        <div
+          class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03),transparent_70%)] pointer-events-none">
+        </div>
+        <div class="flex items-center gap-1.5 mb-5 border-b border-white/5 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500/60"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500/60"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-500/60"></span>
+          <span class="text-[9px] font-mono text-cyan-400 ml-auto uppercase">Blinded Flow</span>
+        </div>
+        <div class="space-y-2.5 font-mono text-xs">
+          <div class="flex items-center justify-between bg-black/40 border border-white/5 p-3 rounded-lg">
+            <span class="text-slate-400">Client</span>
+            <span class="text-cyan-400 font-semibold">ECIES Envelope</span>
+          </div>
+          <div class="text-center text-slate-600 font-bold leading-none">&darr;</div>
+          <div class="flex items-center justify-between bg-black/40 border border-white/5 p-3 rounded-lg">
+            <span class="text-slate-400">Unsecure Agent</span>
+            <span class="text-purple-400 font-semibold">Placeholder Execution</span>
+          </div>
+          <div class="text-center text-slate-600 font-bold leading-none">&darr;</div>
+          <div class="flex items-center justify-between bg-cyan-950/20 border border-cyan-500/20 p-3 rounded-lg">
+            <span class="text-cyan-400">TEE Enclave (WASM)</span>
+            <span class="text-cyan-400 font-bold">Secure Hydration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Core Architecture -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 05 // Core Architecture</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">Terminal 3 ADK Integration</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          Built natively using Terminal 3's secure runtime host APIs. User attributes are securely loaded from enclaves, placeholders are substituted inside the out-of-band TLS tunnel, and transactions are signed on-chain.
+        </p>
+        <div class="grid grid-cols-2 gap-3 w-full font-mono text-[10px] text-slate-400">
+          <div class="glass-panel p-3.5 rounded-xl glass-card-hover transition-all duration-300">
+            <span class="text-cyan-400 block font-bold mb-1 uppercase tracking-wider">user-profile</span> Loads secure DID attributes
+          </div>
+          <div class="glass-panel p-3.5 rounded-xl glass-card-hover transition-all duration-300">
+            <span class="text-cyan-400 block font-bold mb-1 uppercase tracking-wider">http-placeholders</span> Blinds edge egress proxy
+          </div>
+          <div class="glass-panel p-3.5 rounded-xl glass-card-hover transition-all duration-300">
+            <span class="text-cyan-400 block font-bold mb-1 uppercase tracking-wider">signing</span> Issues verifiable credentials
+          </div>
+          <div class="glass-panel p-3.5 rounded-xl glass-card-hover transition-all duration-300">
+            <span class="text-cyan-400 block font-bold mb-1 uppercase tracking-wider">kv-store</span> Maintains append-only audit trail
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative">
+        <div class="flex items-center gap-1.5 mb-5 border-b border-white/5 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="text-[9px] font-mono text-slate-500 ml-auto uppercase">Secure Hydration Log</span>
+        </div>
+        <div class="bg-black/60 rounded-xl border border-white/5 p-5 font-mono text-[10px] text-slate-400 space-y-2">
+          <div><span class="text-slate-500">// Enclave outbox template:</span></div>
+          <div>url: "https://clinic.com/api/book"</div>
+          <div>body: "patient_name={{profile.name}}"</div>
+          <div class="text-cyan-500/80 pt-1.5 border-t border-white/5">// Replaced securely inside secure tunnel</div>
+          <div class="text-cyan-400 font-semibold">body: "patient_name=Maria Garcia"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Cryptographic Moat -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 06 // Cryptographic Moat</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">Groth16 ZK Proofs + ECIES</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          To prevent malicious actors from submitting form actions on behalf of other users, Visor requires a Groth16 ZK-SNARK proof. The Rust TEE contract verifies that the user owns the email hash commitment offline without revealing any identity parameters.
+        </p>
+        <div class="flex gap-4">
+          <div class="glass-panel rounded-xl p-4">
+            <span class="text-[9px] text-slate-500 font-mono uppercase block tracking-wider">ECIES Envelope</span>
+            <span class="text-xs font-bold text-slate-200 mt-1 block">AES-256-GCM + HKDF</span>
+          </div>
+          <div class="glass-panel rounded-xl p-4">
+            <span class="text-[9px] text-slate-500 font-mono uppercase block tracking-wider">RAM Zeroization</span>
+            <span class="text-xs font-bold text-slate-200 mt-1 block">&lt; 10 Microseconds</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative">
+        <div class="flex items-center gap-1.5 mb-5 border-b border-white/5 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="text-[9px] font-mono text-slate-500 ml-auto uppercase">Groth16 Proof Structure</span>
+        </div>
+        <div
+          class="bg-black/60 rounded-xl border border-white/5 p-5 font-mono text-[9px] text-slate-400 space-y-1 overflow-x-hidden leading-relaxed">
+          <div>"proof": {</div>
+          <div class="pl-2"> "pi_a": ["0x0a2f...", "0x1bc3..."],</div>
+          <div class="pl-2"> "pi_b": [["0x23df...", "0x09da..."], ["0x12ab...", "0x2c4e..."]],</div>
+          <div class="pl-2"> "pi_c": ["0x3344...", "0x5566..."]</div>
+          <div>},</div>
+          <div class="text-cyan-400 font-semibold mt-1 border-t border-white/5 pt-1.5">"publicInputs":
+            ["0xcommitment_hash"]</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: x402 Micropayments -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 07 // x402 Micropayments</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">DDoS Prevention via x402</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          To prevent spam and DDoS attacks on target API endpoints, Visor integrates x402 micropayments. Every outbound submission requires payment token verification before the enclave dispatches the request, protecting the egress gateway from abuse.
+        </p>
+        <div class="flex gap-8">
+          <div class="border-l-2 border-cyan-500/50 pl-4">
+            <p class="text-xl font-bold text-cyan-400">Paid-per-Query</p>
+            <p class="text-xs text-slate-500 font-mono uppercase mt-0.5">Ensures gateway request integrity</p>
+          </div>
+          <div class="border-l-2 border-cyan-500/50 pl-4">
+            <p class="text-xl font-bold text-cyan-400">Verifiable Receipts</p>
+            <p class="text-xs text-slate-500 font-mono uppercase mt-0.5">Provides proof of successful payment</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative">
+        <div class="flex items-center gap-1.5 mb-5 border-b border-white/5 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="text-[9px] font-mono text-slate-500 ml-auto uppercase">x402 Micropayment Registry</span>
+        </div>
+        <div class="bg-black/60 rounded-xl border border-white/5 p-5 font-mono text-[10px] text-slate-400 space-y-1.5">
+          <div>struct Payment {</div>
+          <div class="pl-2"> address buyer;</div>
+          <div class="pl-2"> uint256 x402TokenId;</div>
+          <div class="pl-2"> uint256 feeAmount;</div>
+          <div class="pl-2"> bool settled;</div>
+          <div>}</div>
+          <div class="text-cyan-400 font-semibold mt-2 border-t border-white/5 pt-1.5">function verifyPayment(uint256 id) public;
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: The Visor Dashboard -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 08 // Live Dashboard</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">Split-Screen Telemetry Console</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          The Next.js 16 Dashboard displays split-screen observability. Compare the coordinator's unsecure placeholder log side-by-side with the enclave's secure edge-proxied egress wire. Real-time logging tracks the entire lifecycle.
+        </p>
+        <div class="flex gap-6 font-mono text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]"></span>
+            <span>Split-Screen Telemetry</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.4)]"></span>
+            <span>Enclave-Signed Ledger</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-6 max-w-md w-full relative">
+        <div class="border-b border-white/5 pb-3 mb-4 flex justify-between items-center">
+          <span class="text-[10px] font-bold text-slate-200 tracking-wider font-mono">VISOR DASHBOARD TELEMETRY</span>
+          <span
+            class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_rgba(6,182,212,0.5)]"></span>
+        </div>
+        <div class="grid grid-cols-2 gap-3 mb-4 font-mono text-[9px]">
+          <div class="bg-purple-500/10 border border-purple-500/20 text-purple-400 p-2.5 rounded-lg">
+            <span class="font-bold block mb-1">UNSECURE AGENT</span>
+            <span>dob: "{{profile.dob}}"</span>
+          </div>
+          <div class="bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 p-2.5 rounded-lg">
+            <span class="font-bold block mb-1">SECURE ENCLAVE</span>
+            <span>dob: "1994-08-12"</span>
+          </div>
+        </div>
+        <div
+          class="bg-black/50 rounded-xl border border-white/5 p-4 font-mono text-[9px] text-slate-400 space-y-1 leading-relaxed">
+          <div><span class="text-slate-600">&gt;</span> [ENCLAVE] ECIES envelope successfully decrypted.</div>
+          <div><span class="text-slate-600">&gt;</span> [ENCLAVE] Outbox dispatch via http-with-placeholders.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: SLA Latency Benchmarks -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 09 // Performance</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">Sub-Millisecond TEE Decryption</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          High-performance cryptography. The Rust compiled WASIP2 enclave handles ECIES decryption and placeholder substitution in sub-millisecond times, proving security doesn't compromise execution velocity.
+        </p>
+        <div class="w-full border border-white/5 rounded-xl overflow-hidden bg-slate-950/40">
+          <table class="w-full font-mono text-xs">
+            <thead>
+              <tr class="border-b border-white/5 bg-slate-950 text-slate-400 text-left">
+                <th class="p-3">Phase</th>
+                <th class="p-3">p50</th>
+                <th class="p-3">p99</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-white/5 hover:bg-white/5">
+                <td class="p-3 text-slate-200">ECIES Decryption</td>
+                <td class="p-3 text-cyan-400 font-semibold">0.72 ms</td>
+                <td class="p-3 text-cyan-400">1.31 ms</td>
+              </tr>
+              <tr class="border-b border-white/5 hover:bg-white/5">
+                <td class="p-3 text-slate-200">ZK Proof Verify</td>
+                <td class="p-3 text-cyan-400 font-semibold">1.45 ms</td>
+                <td class="p-3 text-cyan-400">2.64 ms</td>
+              </tr>
+              <tr class="hover:bg-white/5">
+                <td class="p-3 text-slate-200">Scrub &amp; Zeroize</td>
+                <td class="p-3 text-green-400 font-semibold">&lt; 0.005 ms</td>
+                <td class="p-3 text-green-400">&lt; 0.008 ms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative flex flex-col justify-between">
+        <span class="text-xs font-mono text-slate-400 block mb-6 uppercase">Execution Latency</span>
+        <div class="h-32 flex items-end gap-5 justify-between pb-3 border-b border-white/5">
+          <div
+            class="w-16 bg-cyan-500/10 border border-cyan-500/25 rounded-t-lg h-14 flex items-center justify-center font-mono text-[9px] text-cyan-400 flex-col gap-0.5 hover:bg-cyan-500/20 transition-all duration-300">
+            <span class="font-bold">0.72ms</span>
+            <span class="text-[7px] text-slate-500">ECIES</span>
+          </div>
+          <div
+            class="w-16 bg-cyan-500/25 border border-cyan-500/40 rounded-t-lg h-28 flex items-center justify-center font-mono text-[9px] text-cyan-300 flex-col gap-0.5 hover:bg-cyan-500/35 transition-all duration-300">
+            <span class="font-bold">1.45ms</span>
+            <span class="text-[7px] text-slate-500">ZK Verify</span>
+          </div>
+          <div
+            class="w-16 bg-emerald-500/10 border border-emerald-500/25 rounded-t-lg h-3 flex items-center justify-center font-mono text-[7px] text-emerald-400 flex-col hover:bg-emerald-500/20 transition-all duration-300">
+            <span class="font-bold">&lt;8μs</span>
+            <span class="text-[6px] text-slate-500">scrub</span>
+          </div>
+        </div>
+        <span class="text-[9px] font-mono text-slate-500 mt-3 block text-center">Benchmark run over 1,000 simulated
+          iterations</span>
+      </div>
+    </div>
+
+    <!-- Slide 10: Discovered SDK Bugs & Gaps -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 10 // Bug Bounty</span>
+        <h2 class="text-4xl font-extrabold tracking-tight mb-6">11 Onboarding Bugs &amp; Gaps</h2>
+        <p class="text-slate-400 leading-relaxed mb-6">
+          While building the Vouch Suite (including Visor, Epoch, Lethe, Silo, and Synod), we performed a deep audit of the `@terminal3` SDK. We discovered and documented 11 distinct bugs and documentation gaps, providing full workarounds.
+        </p>
+        <div class="space-y-2.5 text-xs font-mono text-slate-300">
+          <div class="flex items-center gap-2.5">
+            <span class="text-cyan-400 font-bold">&radic;</span>
+            <span>Unmatched marker behavior in http-with-placeholders (Gap #10)</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="text-cyan-400 font-bold">&radic;</span>
+            <span>Authorization allowlist matching syntax (Gap #11)</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative flex items-center justify-center">
+        <div class="w-full space-y-4">
+          <span class="text-xs font-mono text-slate-500 uppercase">Bug Bounty Contributions</span>
+          <div
+            class="p-5 border border-orange-500/20 bg-orange-950/10 rounded-xl flex items-center gap-4 hover:border-orange-500/40 transition-all duration-300">
+            <div
+              class="w-12 h-12 rounded-full bg-orange-500/10 border border-orange-500/30 flex items-center justify-center font-bold text-orange-400 font-display shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+              BUG</div>
+            <div class="flex-1">
+              <span class="text-xs font-bold text-slate-200 block">11 Audited Findings</span>
+              <span class="text-[10px] font-mono text-slate-400">Detailed repros &amp; fixes in BUGS.md</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Call to Action -->
+    <div class="slide max-w-5xl w-full flex flex-col md:flex-row items-center justify-between gap-12">
+      <div class="flex-1 flex flex-col items-start text-left">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase mb-4">Slide 11 // Conclusion</span>
+        <h2 class="text-5xl font-black tracking-tight mb-6">Shield Your Agent's Eyes Today</h2>
+        <p class="text-slate-400 leading-relaxed mb-8 max-w-md">
+          Visor is fully open-source, offering a robust client-side SDK, Express coordinator gateway, Rust enclave contract, and split-screen Next.js dashboard.
+        </p>
+        <div class="flex gap-4">
+          <a href="https://github.com/edycutjong/visor" target="_blank"
+            class="px-6 py-3 bg-linear-to-r from-cyan-500 to-purple-500 rounded-xl text-xs font-mono font-bold text-slate-950 hover:opacity-90 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)] transition-all">
+            GITHUB REPOSITORY
+          </a>
+          <button onclick="goToSlide(0)"
+            class="px-6 py-3 border border-white/10 hover:border-white/20 rounded-xl text-xs font-mono font-bold text-slate-400 hover:text-slate-200 transition-colors">
+            RESTART &larr;
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 glass-panel rounded-2xl p-8 max-w-md w-full relative">
+        <div class="flex items-center gap-1.5 mb-5 border-b border-white/5 pb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-slate-800"></span>
+          <span class="text-[9px] font-mono text-slate-500 ml-auto uppercase">Visor Specifications</span>
+        </div>
+        <div class="space-y-3 font-mono text-[10.5px] text-slate-400">
+          <div class="flex justify-between"><span>SDK Release:</span><span
+              class="text-cyan-400 font-semibold">v1.0.0-beta</span></div>
+          <div class="flex justify-between"><span>TEE Runtime:</span><span class="text-cyan-400 font-semibold">Active
+              (CCF)</span></div>
+          <div class="flex justify-between"><span>Egress Sandbox:</span><span class="text-green-400 font-semibold">Operational</span></div>
+          <div class="flex justify-between"><span>License:</span><span class="text-slate-300">MIT</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Navigation Footer Controls -->
+  <footer
+    class="h-16 border-t border-white/5 bg-[#030712]/80 backdrop-blur-lg flex items-center justify-between px-8 z-10 shrink-0">
+    <div class="text-[10px] font-mono text-slate-500 uppercase">
+      Visor Pitch Deck · Swiss International Style
+    </div>
+    <div class="flex items-center gap-6">
+      <button onclick="prevSlide()"
+        class="px-4 py-1.5 border border-white/5 hover:border-white/10 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-mono text-slate-400 hover:text-slate-200 transition-all select-none">&larr;
+        PREV</button>
+      <div class="flex items-center gap-2" id="dot-navigation"></div>
+      <span id="slide-num" class="text-xs font-mono text-cyan-400 min-w-[50px] text-center">1 / 11</span>
+      <button onclick="nextSlide()"
+        class="px-4 py-1.5 border border-white/5 hover:border-white/10 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-mono text-slate-400 hover:text-slate-200 transition-all select-none">NEXT
+        &rarr;</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideNum = document.getElementById('slide-num');
+    const progressBar = document.getElementById('progress-bar');
+    const dotNavigation = document.getElementById('dot-navigation');
+
+    function initDots() {
+      dotNavigation.innerHTML = '';
+      slides.forEach((slide, index) => {
+        const dot = document.createElement('button');
+        dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-cyan-500 w-4' : 'bg-white/20 hover:bg-white/40'}`;
+        dot.title = slide.querySelector('h2')?.textContent || `Slide ${index + 1}`;
+        dot.onclick = () => goToSlide(index);
+        dotNavigation.appendChild(dot);
+      });
+    }
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      // Update Slide numbers and progress bar
+      slideNum.textContent = `${currentSlide + 1} / ${slides.length}`;
+      const progressPercent = ((currentSlide + 1) / slides.length) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // Update Dot classes
+      const dots = dotNavigation.querySelectorAll('button');
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-cyan-500 w-4';
+        } else {
+          dot.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-white/20 hover:bg-white/40';
+        }
+      });
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < slides.length) {
+        currentSlide = index;
+        updateSlides();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      }
+    });
+
+    // Initialize dot navigation controls
+    initDots();
+  </script>
+</body>
+
+</html>
