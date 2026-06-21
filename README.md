@@ -27,6 +27,8 @@
   ![Intel TDX](https://img.shields.io/badge/Intel_TDX-0071c5?style=flat&logo=intel&logoColor=white)
   ![T3 ADK](https://img.shields.io/badge/T3_ADK-8b5cf6?style=flat)
   [![CI](https://github.com/edycutjong/visor/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/visor/actions/workflows/ci.yml)
+  [![npm sdk version](https://img.shields.io/npm/v/@edycutjong/visor.svg?style=flat&logo=npm&color=06b6d4)](https://www.npmjs.com/package/@edycutjong/visor)
+  [![npm cli version](https://img.shields.io/npm/v/@edycutjong/visor-cli.svg?style=flat&logo=npm&color=06b6d4)](https://www.npmjs.com/package/@edycutjong/visor-cli)
 
 </div>
 
