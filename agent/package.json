@@ -4,7 +4,7 @@
   "description": "Visor Node.js Coordinator Agent",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/wasm dist/ && cp -r src/wasm-instantiated dist/",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
     "test": "jest"
