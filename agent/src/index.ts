@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
+import * as crypto from 'crypto';
 import {
   wasmContracts,
   wasmContractsPromise,
@@ -88,14 +89,14 @@ app.use(async (req, res, next) => {
 app.post('/api/mock/clinic/intake', (req, res) => {
   const payload = req.body;
   console.log('--- CLINICAL INTAKE WIRE INTERCEPT ---', payload);
-  res.status(200).json({ status: 'received', apptId: `APT-${Math.floor(1000 + Math.random() * 9000)}` });
+  res.status(200).json({ status: 'received', apptId: `APT-${crypto.randomInt(1000, 10000)}` });
 });
 
 // Mock Target job application receiver
 app.post('/api/mock/ats/apply', (req, res) => {
   const payload = req.body;
   console.log('--- JOB APPLICATION WIRE INTERCEPT ---', payload);
-  res.status(200).json({ status: 'submitted', candidateId: `CAN-${Math.floor(10000 + Math.random() * 90000)}` });
+  res.status(200).json({ status: 'submitted', candidateId: `CAN-${crypto.randomInt(10000, 100000)}` });
 });
 
 // 1. Register Template
@@ -187,7 +188,7 @@ app.post('/api/submission/submit', async (req, res) => {
 
     res.status(200).json({
       status: 'confirmed',
-      apptId: targetData.apptId || targetData.candidateId || `TX-${Math.floor(100000 + Math.random() * 900000)}`,
+      apptId: targetData.apptId || targetData.candidateId || `TX-${crypto.randomInt(100000, 1000000)}`,
       receiptVc: vc
     });
   } catch (error: any) {

@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
-import { spawnSync } from 'child_process';
+import { execFileSync } from 'child_process';
 class MockOutputStream {
   blockingWriteAndFlush(contents: Uint8Array): void {
     process.stderr.write(contents);
@@ -156,43 +156,38 @@ export function encryptEciesPayload(profile: Record<string, string>): {
   };
 }
 
-// Synchronous HTTP request simulator for http-with-placeholders
+// Synchronous HTTP request simulator for http-with-placeholders using curl via execFileSync
 function syncFetch(url: string, options: { method: string; headers?: Record<string, string>; body?: string; timeout: number }): { status: number; body: string } {
-  const script = `
-    const fetch = globalThis.fetch;
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), ${options.timeout});
-    
-    fetch(${JSON.stringify(url)}, {
-      method: ${JSON.stringify(options.method)},
-      headers: ${JSON.stringify(options.headers || {})},
-      body: ${JSON.stringify(options.body || null)},
-      signal: controller.signal
-    })
-    .then(async res => {
-      const text = await res.text();
-      console.log(JSON.stringify({ status: res.status, body: text }));
-      process.exit(0);
-    })
-    .catch(err => {
-      console.error(err.message);
-      process.exit(1);
-    });
-  `;
-
-  const child = spawnSync(process.execPath, ['-e', script], {
-    timeout: options.timeout + 1000,
-    encoding: 'utf8'
-  });
-
-  if (child.status !== 0) {
-    throw new Error(child.stderr ? child.stderr.trim() : 'Synchronous fetch timed out or failed');
+  // Build the curl argv directly and invoke without a shell. The url and header
+  // values are passed as discrete arguments (never interpolated into a command
+  // string), so an attacker-influenced url/header cannot inject shell commands.
+  // The request body is streamed via stdin rather than echo|base64 piping.
+  const args = ['-s', '--max-time', String(Math.ceil(options.timeout / 1000)), '-w', '\n%{http_code}', '-X', options.method];
+  
+  if (options.headers) {
+    for (const [k, v] of Object.entries(options.headers)) {
+      args.push('-H', `${k}: ${v}`);
+    }
   }
 
+  let inputBuf: Buffer | undefined;
+  if (options.body) {
+    args.push('--data-binary', '@-');
+    inputBuf = Buffer.from(options.body, 'utf8');
+  }
+
+  args.push(url);
+
   try {
-    return JSON.parse(child.stdout.trim());
-  } catch (e) {
-    throw new Error('Failed to parse sync fetch response: ' + child.stdout);
+    const output = execFileSync('curl', args, inputBuf ? { input: inputBuf } : undefined);
+    const lines = output.toString('binary').split('\n');
+    const lastLine = lines.pop();
+    const httpCodeStr = lastLine ? lastLine.trim() : '';
+    const httpCode = parseInt(httpCodeStr, 10) || 200;
+    const body = lines.join('\n');
+    return { status: httpCode, body };
+  } catch (e: any) {
+    throw new Error('Synchronous fetch timed out or failed: ' + e.message);
   }
 }
 
@@ -346,7 +341,7 @@ const importsObj: any = {
             code: 200,
             payload: new Uint8Array(Buffer.from(JSON.stringify({
               status: 'received',
-              apptId: `APT-${Math.floor(1000 + Math.random() * 9000)}`
+              apptId: `APT-${crypto.randomInt(1000, 10000)}`
             }), 'utf8'))
           };
         } else if (urlLower.includes('ats')) {
@@ -355,7 +350,7 @@ const importsObj: any = {
             code: 200,
             payload: new Uint8Array(Buffer.from(JSON.stringify({
               status: 'submitted',
-              candidateId: `CAN-${Math.floor(10000 + Math.random() * 90000)}`
+              candidateId: `CAN-${crypto.randomInt(10000, 100000)}`
             }), 'utf8'))
           };
         }
@@ -403,7 +398,7 @@ const importsObj: any = {
             code: 200,
             payload: new Uint8Array(Buffer.from(JSON.stringify({
               status: 'received',
-              apptId: `APT-${Math.floor(1000 + Math.random() * 9000)}`
+              apptId: `APT-${crypto.randomInt(1000, 10000)}`
             }), 'utf8'))
           };
         } else if (urlLower.includes('ats')) {
@@ -412,7 +407,7 @@ const importsObj: any = {
             code: 200,
             payload: new Uint8Array(Buffer.from(JSON.stringify({
               status: 'submitted',
-              candidateId: `CAN-${Math.floor(10000 + Math.random() * 90000)}`
+              candidateId: `CAN-${crypto.randomInt(10000, 100000)}`
             }), 'utf8'))
           };
         }

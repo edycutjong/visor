@@ -136,8 +136,10 @@ export default function Page() {
     setSubmissionStatus('draft');
     setLastResponse(null);
 
-    const subId = `sub_${selectedTemplate.id}_${Math.floor(Math.random() * 1000000)}`;
-    const txReceipt = `0x${Math.floor(Math.random() * 1000000).toString(16)}receipt`;
+    const randomUint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
+    const subId = `sub_${selectedTemplate.id}_${randomUint32 % 1000000}`;
+    const randomBuf = window.crypto.getRandomValues(new Uint8Array(4));
+    const txReceipt = `0x${Array.from(randomBuf, b => b.toString(16).padStart(2, '0')).join('')}receipt`;
     const zkProof = {
       pi_a: [
         "0x11219b165b4c1bdc30c8cb080b06b3e4dc4ec2bc2ef82b9dc3c8c704f05eb112",
