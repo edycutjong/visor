@@ -12,6 +12,17 @@
   "dependencies": {
     "@terminal3/t3n-sdk": "^3.7.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edycutjong/visor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edycutjong/visor/issues"
+  },
+  "homepage": "https://github.com/edycutjong/visor#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "typescript": "^5.0.0",
     "@types/node": "^20.0.0",
