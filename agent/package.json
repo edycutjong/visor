@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@bytecodealliance/preview2-shim": "^0.19.0",
-    "body-parser": "^1.20.2",
+    "body-parser": "^2.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.0"
+    "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
