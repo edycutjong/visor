@@ -10,7 +10,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@terminal3/t3n-sdk": "^3.7.0"
+    "@terminal3/t3n-sdk": "^5.7.0"
   },
   "repository": {
     "type": "git",
